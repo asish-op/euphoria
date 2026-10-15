@@ -1,0 +1,448 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #0b0616;
+  --ink-2: #140a26;
+  --violet: #7c3aed;
+  --lilac: #c4b5fd;
+  --orchid: #e879f9;
+  --pink: #f472b6;
+  --ice: #f5f3ff;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-violet: var(--violet);
+  --color-lilac: var(--lilac);
+  --color-orchid: var(--orchid);
+  --color-pink: var(--pink);
+  --color-ice: var(--ice);
+  --font-display: var(--font-instrument), "Times New Roman", serif;
+  --font-sans: var(--font-manrope), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+html.is-loading {
+  overflow: hidden;
+}
+
+/* Off-screen animation start positions (x offsets, 3D flips) must never create horizontal scroll: on phones
+   that widens the layout viewport and stretches every fixed element (header, preloader) past the screen.
+   `clip` (unlike `hidden`) also keeps position: sticky working. */
+html,
+main {
+  overflow-x: clip;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--ink);
+}
+
+/* No background on body: html supplies --ink, so the fixed -z-10 backdrop can paint above it. */
+body {
+  color: var(--ice);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--orchid);
+  color: var(--ink);
+}
+
+/* ── Typography ─────────────────────────────────────────────── */
+
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--lilac);
+}
+
+/* Chrome-and-glitter wordmark: there is no logo, so the type is the logo. */
+.wordmark {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 0.82;
+  letter-spacing: -0.035em;
+  background: linear-gradient(
+    100deg,
+    #ffffff 0%,
+    #efe4ff 14%,
+    #c084fc 30%,
+    #f0abfc 46%,
+    #ffffff 58%,
+    #a78bfa 76%,
+    #ffffff 100%
+  );
+  background-size: 260% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 38px rgba(168, 85, 247, 0.55)) drop-shadow(0 2px 0 rgba(76, 29, 149, 0.8));
+  animation: sheen 9s ease-in-out infinite;
+}
+
+@keyframes sheen {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.headline {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+  text-wrap: balance;
+}
+
+/* Split headlines: SplitText wraps each word in a div, so the gradient goes on those (a transformed child
+   cannot be clipped by its parent's background). */
+.headline .grad {
+  font-style: italic;
+  color: #d8b4fe;
+}
+
+.headline .grad div {
+  background: linear-gradient(100deg, #f0abfc, #c4b5fd 55%, #ffffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.headline em,
+.em-word {
+  font-style: italic;
+  background: linear-gradient(100deg, #f0abfc, #c4b5fd 50%, #ffffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── Surfaces ───────────────────────────────────────────────── */
+
+.glass {
+  background:
+    linear-gradient(rgba(11, 6, 22, 0.38), rgba(11, 6, 22, 0.38)),
+    linear-gradient(160deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.02) 45%, rgba(124, 58, 237, 0.08));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -20px 40px rgba(76, 29, 149, 0.18),
+    0 30px 60px -20px rgba(8, 2, 20, 0.8),
+    0 0 0 1px rgba(8, 2, 20, 0.4);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+
+/* ── Frosted header ─────────────────────────────────────────── */
+/* Heavier blur and a mostly-opaque tinted body, so page content and shards read as a soft haze behind it. */
+
+.nav-frost {
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E"),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02) 60%),
+    rgba(24, 12, 46, 0.78);
+  background-blend-mode: soft-light, normal, normal;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  -webkit-backdrop-filter: blur(30px) saturate(150%);
+  backdrop-filter: blur(30px) saturate(150%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -18px 30px -18px rgba(124, 58, 237, 0.35),
+    0 18px 40px -16px rgba(4, 1, 12, 0.85),
+    0 0 0 1px rgba(8, 2, 20, 0.5);
+}
+
+/* ── Liquid glass buttons ───────────────────────────────────── */
+/* Translucent body + bright specular rim + a soft top gloss + a highlight that follows the cursor.
+   Chromium additionally refracts the scene behind it (see LiquidFx). */
+
+.btn {
+  --tint: 255, 255, 255;
+  --tint-a: 0.07;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  border-radius: 999px;
+  padding: 0.95rem 1.7rem;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+  color: #fff;
+  cursor: pointer;
+  text-shadow: 0 1px 10px rgba(8, 2, 20, 0.55);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.03) 55%, rgba(255, 255, 255, 0.1)),
+    rgba(var(--tint), var(--tint-a));
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  -webkit-backdrop-filter: blur(14px) saturate(190%) brightness(1.12);
+  backdrop-filter: blur(14px) saturate(190%) brightness(1.12);
+  box-shadow:
+    inset 0 1.5px 1px rgba(255, 255, 255, 0.75),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.3),
+    inset 2px 0 3px -2px rgba(255, 255, 255, 0.6),
+    inset -2px 0 3px -2px rgba(255, 255, 255, 0.4),
+    inset 0 -16px 22px -12px rgba(255, 255, 255, 0.22),
+    0 10px 28px -10px rgba(6, 2, 16, 0.75),
+    0 1px 0 rgba(255, 255, 255, 0.05);
+  transition:
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.3s,
+    background-color 0.3s;
+  will-change: transform;
+}
+
+/* Static gloss across the upper half. */
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 1px 1px 46% 1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0));
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Specular hot-spot that tracks the cursor. */
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(90px circle at var(--mx, 50%) var(--my, 0%), rgba(255, 255, 255, 0.6), transparent 65%);
+  mix-blend-mode: soft-light;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.btn:hover {
+  transform: translateY(-2px) scale(1.035);
+}
+
+.btn:hover::after {
+  opacity: 1;
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.97);
+  transition-duration: 0.12s;
+}
+
+.btn:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.85);
+  outline-offset: 3px;
+}
+
+/* Refraction where the browser supports SVG backdrop filters. */
+html[data-refract="true"] .btn {
+  -webkit-backdrop-filter: url(#liquid-glass) blur(4px) saturate(190%) brightness(1.12);
+  backdrop-filter: url(#liquid-glass) blur(4px) saturate(190%) brightness(1.12);
+}
+
+/* Primary: same glass, tinted orchid, with a glowing border and a breathing aura.
+   --aura (0.75 ↔ 1.15) scales every glow layer, so the pulse never fights the hover state. */
+@property --aura {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
+
+.btn-primary {
+  --tint: 232, 121, 249;
+  --tint-a: 0.34;
+  --aura: 1;
+  border: 1.5px solid rgba(255, 226, 255, 0.72);
+  box-shadow:
+    /* the rim itself glows, inside and out */
+    inset 0 0 0 1px rgba(255, 210, 255, 0.35),
+    inset 0 0 16px rgba(244, 170, 255, calc(0.5 * var(--aura))),
+    0 0 0 1px rgba(244, 170, 255, calc(0.4 * var(--aura))),
+    0 0 14px 1px rgba(244, 150, 255, calc(0.75 * var(--aura))),
+    /* wider halo */
+    0 0 38px 4px rgba(214, 100, 250, calc(0.5 * var(--aura))),
+    0 0 90px 10px rgba(150, 70, 240, calc(0.32 * var(--aura))),
+    /* glass edges */
+    inset 0 1.5px 1px rgba(255, 255, 255, 0.9),
+    inset 0 -1px 1px rgba(255, 220, 255, 0.45),
+    inset 0 -16px 24px -10px rgba(244, 170, 255, 0.4),
+    0 14px 30px -12px rgba(6, 2, 16, 0.7);
+  animation: aura 3.6s ease-in-out infinite;
+}
+
+.btn-primary:hover {
+  --tint-a: 0.44;
+  border-color: rgba(255, 240, 255, 0.95);
+  animation-duration: 2.2s;
+}
+
+@keyframes aura {
+  0%,
+  100% {
+    --aura: 0.8;
+  }
+  50% {
+    --aura: 1.2;
+  }
+}
+
+/* Ghost: the clearer, colourless variant. */
+.btn-ghost {
+  --tint-a: 0.04;
+}
+
+/* Animated equalizer glyph for the sound button. */
+.eq {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2.5px;
+  height: 1rem;
+}
+
+.eq i {
+  display: block;
+  width: 3px;
+  height: 35%;
+  border-radius: 2px;
+  background: currentColor;
+  opacity: 0.85;
+}
+
+.eq-on i {
+  animation: eq 0.9s ease-in-out infinite;
+}
+
+.eq-on i:nth-child(2) {
+  animation-delay: -0.35s;
+}
+.eq-on i:nth-child(3) {
+  animation-delay: -0.6s;
+}
+.eq-on i:nth-child(4) {
+  animation-delay: -0.15s;
+}
+
+@keyframes eq {
+  0%,
+  100% {
+    height: 25%;
+  }
+  50% {
+    height: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary {
+    animation: none;
+  }
+  .eq-on i {
+    animation: none;
+    height: 70%;
+  }
+  .btn {
+    transition: none;
+  }
+}
+
+/* ── Motion ─────────────────────────────────────────────────── */
+
+.twinkle {
+  animation: twinkle var(--d, 3s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(0.7) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15) rotate(20deg);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal[data-in="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .wordmark,
+  .twinkle,
+  .marquee-track {
+    animation: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Fallback backdrop for browsers without WebGPU. */
+.aurora {
+  background:
+    radial-gradient(60% 55% at 78% 22%, rgba(168, 85, 247, 0.85), transparent 72%),
+    radial-gradient(55% 50% at 12% 78%, rgba(232, 121, 249, 0.55), transparent 72%),
+    radial-gradient(75% 60% at 50% 108%, rgba(124, 58, 237, 0.75), transparent 72%),
+    var(--ink);
+  animation: drift 18s ease-in-out infinite alternate;
+}
+
+@keyframes drift {
+  to {
+    background-position:
+      -6% 4%,
+      6% -4%,
+      0 -6%,
+      0 0;
+  }
+}

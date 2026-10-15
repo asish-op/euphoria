@@ -1,0 +1,112 @@
+/* Booking pages share the landing page's lilac type and frosted glass surfaces. */
+.book-nav { position: relative; z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 1rem; width: min(1152px, calc(100% - 32px)); margin: 20px auto 0; border-radius: 999px; padding: 15px 24px; }
+.book-brand { font-family: var(--font-display); font-style: italic; font-size: 2rem; line-height: 1; white-space: nowrap; }
+.book-brand span { color: var(--orchid); }
+.book-nav nav { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 22px; font-size: .86rem; }
+.book-nav a:hover, .book-nav button:hover { color: var(--orchid); }
+.book-nav button { cursor: pointer; }
+.booking-page { position: relative; width: min(1152px, calc(100% - 40px)); margin: 0 auto; padding: 72px 0 90px; flex: 1; }
+.book-heading { max-width: 820px; margin-bottom: 48px; }
+.book-heading h1 { font-family: var(--font-display); font-style: italic; font-size: clamp(3.3rem, 6.4vw, 5.5rem); line-height: 1.05; margin: 18px 0; letter-spacing: -.025em; }
+.book-heading > p:last-child { color: rgb(245 243 255 / .7); font-size: 1.05rem; }
+.book-card { border: 1px solid rgb(196 181 253 / .22); border-radius: 28px; background: linear-gradient(150deg, rgb(255 255 255 / .065), rgb(11 6 22 / .88) 60%, rgb(124 58 237 / .12)); backdrop-filter: blur(22px); box-shadow: inset 0 1px 0 rgb(255 255 255 / .12), 0 24px 60px rgb(8 2 20 / .35); padding: 32px; min-width: 0; }
+.booking-page h2 { font-family: var(--font-display); font-size: 2.65rem; line-height: 1.12; margin: 12px 0 18px; font-weight: 400; }
+.booking-page h3 { font-size: 1.25rem; margin: 20px 0 10px; }
+.booking-page p { line-height: 1.65; }
+.book-muted { color: rgb(245 243 255 / .63); font-size: .9rem; }
+.book-state { text-align: center; padding: 50px 28px; }
+.book-state p { max-width: 620px; margin: 16px auto; }
+.book-state .book-actions { justify-content: center; }
+.book-spark { display: block; color: var(--orchid); font-size: 3.5rem; line-height: 1.3; }
+.book-pass-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap: 24px; }
+.book-pass { display: flex; flex-direction: column; }
+.book-featured { border-color: rgb(232 121 249 / .65); box-shadow: inset 0 1px 0 rgb(255 255 255 / .2), 0 0 50px rgb(168 85 247 / .13); }
+.book-pass-top { display: flex; justify-content: space-between; color: var(--orchid); }
+.book-price { font-size: 2.7rem; margin: 24px 0; font-family: var(--font-display); }
+.book-price del { margin-left: 12px; font-family: var(--font-sans); font-size: .95rem; color: rgb(245 243 255 / .45); }
+.book-pass ul { margin: 0 0 24px; display: grid; gap: 12px; color: var(--lilac); flex: 1; }
+.book-stock { font-size: .82rem; color: var(--lilac); margin: 20px 0; }
+.book-pass .btn { width: 100%; }
+.booking-page .btn:disabled { cursor: not-allowed; opacity: .42; animation: none; transform: none; }
+.book-checkout-grid { display: grid; grid-template-columns: minmax(0, 1fr) 310px; gap: 24px; align-items: start; }
+.book-summary { position: sticky; top: 24px; }
+.book-summary .book-brand { display: block; color: var(--lilac); font-size: 3rem; margin: 28px 0; }
+.book-progress { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px solid rgb(255 255 255 / .12); padding-bottom: 24px; margin-bottom: 30px; font-size: .7rem; color: rgb(245 243 255 / .4); }
+.book-progress span { display: block; margin-top: 6px; }
+.book-progress [aria-current="step"] { color: var(--orchid); }
+.book-form { display: grid; gap: 22px; margin-top: 24px; }
+.book-form > .btn { justify-self: start; }
+.book-field { display: flex; flex-direction: column; gap: 9px; font-size: .87rem; color: var(--lilac); min-width: 0; }
+.book-field label > span { color: var(--orchid); }
+.book-field input:not([type="checkbox"]):not([type="radio"]), .book-field select, .book-field textarea { background: rgb(8 2 20 / .65); border: 1px solid rgb(196 181 253 / .28); border-radius: 12px; padding: 13px 15px; color: var(--ice); width: 100%; min-width: 0; font-size: 1rem; }
+.book-field input:focus, .book-field select:focus, .book-field textarea:focus { outline: 2px solid var(--orchid); outline-offset: 2px; }
+.book-field [aria-invalid="true"] { border-color: #fda4af !important; }
+.book-checkbox { flex-direction: row-reverse; justify-content: flex-end; align-items: center; flex-wrap: wrap; }
+.book-field input[type="checkbox"], .book-field input[type="radio"], .book-check input { accent-color: var(--orchid); width: 18px; height: 18px; flex-shrink: 0; }
+.book-choices { display: flex; gap: 12px; flex-wrap: wrap; }
+.book-choices label { display: flex; align-items: center; gap: 8px; border: 1px solid rgb(196 181 253 / .23); padding: 12px 16px; border-radius: 12px; color: var(--ice); }
+.book-check { display: flex; align-items: flex-start; gap: 12px; font-size: .88rem; line-height: 1.5; margin-top: 24px; }
+.book-form .book-check { margin-top: 0; }
+.book-field-error { color: #fda4af; font-size: .8rem; }
+.book-error, .book-notice { padding: 18px 20px; border-radius: 14px; margin: 20px 0; border: 1px solid rgb(251 113 133 / .3); color: #fecdd3; background: rgb(136 19 55 / .13); overflow-wrap: anywhere; }
+.book-error .btn { margin-top: 12px; }
+.book-notice { color: var(--lilac); border-color: rgb(196 181 253 / .3); background: rgb(124 58 237 / .09); }
+.book-success { color: #a7f3d0; font-size: .85rem; }
+.book-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 32px; }
+.book-text-button { cursor: pointer; color: var(--lilac); font-size: .87rem; }
+.book-text-button:hover { color: var(--orchid); }
+.book-auth-card { max-width: 600px; margin: 0 auto; }
+.book-auth > .book-text-button { margin-top: 24px; }
+.book-tabs { display: flex; gap: 12px; padding-bottom: 20px; margin-bottom: 28px; border-bottom: 1px solid rgb(255 255 255 / .1); }
+.book-tabs button { cursor: pointer; padding: 10px 20px; border-radius: 999px; border: 1px solid rgb(196 181 253 / .22); font-size: .9rem; }
+.book-tabs [aria-pressed="true"] { color: var(--orchid); background: rgb(168 85 247 / .16); border-color: rgb(232 121 249 / .5); }
+.book-quantity { display: flex; align-items: center; gap: 36px; margin: 40px 0; }
+.book-quantity button { width: 52px; height: 52px; font-size: 1.7rem; border-radius: 50%; border: 1px solid rgb(196 181 253 / .3); cursor: pointer; }
+.book-quantity button:disabled { opacity: .3; cursor: not-allowed; }
+.book-quantity output { font-family: var(--font-display); font-size: 4rem; }
+.book-details { border-bottom: 1px solid rgb(196 181 253 / .15); padding: 20px 0; font-size: .88rem; }
+.book-details summary { cursor: pointer; color: var(--lilac); }
+.book-details dl { display: grid; gap: 10px; margin: 18px 0 6px; }
+.book-details dl div { display: grid; grid-template-columns: 1fr 1.4fr; gap: 20px; }
+.book-details dt { color: rgb(245 243 255 / .5); overflow-wrap: anywhere; }
+.book-details dd { overflow-wrap: anywhere; }
+.book-code-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 12px; margin-top: 22px; }
+.book-code-row > p { grid-column: 1 / -1; }
+.book-code-row .btn { padding: 12px 18px; font-size: .8rem; }
+.book-totals { margin-top: 32px; }
+.book-total-line { display: flex; justify-content: space-between; gap: 20px; padding: 12px 0; font-size: .88rem; }
+.book-summary .book-total-line { border-top: 1px solid rgb(255 255 255 / .12); margin: 24px 0; }
+.book-total-line strong { text-align: right; }
+.book-grand-total { font-size: 1.2rem; padding: 22px 0; border-top: 1px solid rgb(196 181 253 / .2); margin-top: 14px; }
+.book-banner { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.book-card.book-banner { margin-bottom: 26px; }
+.book-status { display: inline-flex; align-items: center; flex-shrink: 0; padding: 7px 12px; border: 1px solid rgb(253 230 138 / .3); border-radius: 999px; color: #fde68a; font-size: .76rem; }
+.book-status.book-paid { border-color: rgb(110 231 183 / .35); color: #a7f3d0; }
+.book-status.book-failed { border-color: rgb(253 164 175 / .35); color: #fda4af; }
+.book-order { max-width: 900px; margin: 0 auto; }
+.book-order-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; padding: 30px 0; border-bottom: 1px solid rgb(196 181 253 / .2); margin-bottom: 28px; }
+.book-order-facts dt { color: rgb(245 243 255 / .5); font-size: .78rem; margin-bottom: 8px; }
+.book-order-facts dd { overflow-wrap: anywhere; }
+.book-upi-layout { display: flex; align-items: center; gap: 40px; margin: 28px 0; }
+.book-upi-layout > div > .eyebrow { margin-top: 20px; }
+.book-upi-layout .btn { margin-top: 20px; font-size: .85rem; }
+.book-upi-id { font-size: 1.3rem; overflow-wrap: anywhere; }
+.book-qr { background: white; padding: 16px; display: inline-block; border-radius: 14px; line-height: 0; }
+.book-proof-preview { width: auto; height: auto; max-height: 260px; max-width: 100%; object-fit: contain; border-radius: 12px; }
+.book-history { margin-bottom: 28px; }
+.book-history-row { display: grid; grid-template-columns: minmax(0, 1.5fr) 1fr auto auto auto; align-items: center; gap: 22px; padding: 22px 0; border-top: 1px solid rgb(196 181 253 / .15); font-size: .85rem; }
+.book-history-row > div { overflow-wrap: anywhere; }
+.book-ticket-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 500px), 1fr)); gap: 24px; }
+.book-ticket { display: grid; grid-template-columns: minmax(0, 1fr) 180px; gap: 22px; }
+.book-ticket h2 { font-size: 2.1rem; }
+.book-ticket .btn { padding: 11px 17px; font-size: .77rem; }
+.book-ticket .book-banner { gap: 8px; }
+.book-ticket-code { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; border-left: 1px dashed rgb(196 181 253 / .25); padding-left: 22px; }
+.book-ticket-code code { font-size: .76rem; overflow-wrap: anywhere; text-align: center; }
+.book-ticket-code .eyebrow { font-size: .6rem; }
+.book-ticket-code .book-qr { padding: 12px; }
+.book-legal { white-space: pre-wrap; font-size: .95rem; line-height: 1.9; }
+.book-footer { width: min(1152px, calc(100% - 40px)); margin: 0 auto; padding: 26px 0; display: flex; justify-content: space-between; gap: 20px; color: rgb(245 243 255 / .5); border-top: 1px solid rgb(255 255 255 / .1); font-size: .8rem; }
+.book-venue-map { width: 100%; min-height: 330px; border: 0; border-radius: 24px; }
+@media (max-width: 900px) { .book-checkout-grid { grid-template-columns: 1fr; } .book-summary { position: static; } .book-history-row { grid-template-columns: 1fr auto; } .book-ticket-grid { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .book-nav { padding: 13px 17px; gap: 12px; width: calc(100% - 24px); border-radius: 22px; } .book-nav nav { gap: 9px 13px; font-size: .7rem; } .book-brand { font-size: 1.6rem; } .booking-page { width: calc(100% - 28px); padding-top: 48px; } .book-heading { margin-bottom: 30px; } .book-card { padding: 24px 20px; border-radius: 22px; } .book-ticket { grid-template-columns: 1fr; } .book-ticket-code { border-left: 0; border-top: 1px dashed rgb(196 181 253 / .25); padding: 24px 0 0; } .book-upi-layout { flex-direction: column; align-items: flex-start; gap: 10px; } .book-order-facts { gap: 22px 14px; font-size: .85rem; } .book-code-row .btn { padding: 12px; } .book-footer { flex-wrap: wrap; } .book-actions .btn { font-size: .85rem; padding: 13px 20px; } }
