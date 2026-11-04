@@ -8,14 +8,14 @@ import { EVENT, NAV, HIGHLIGHTS, RUN_OF_SHOW } from "@/lib/event";
 import Link from "next/link";
 import { EventHeroFacts, EventDetailCards, HomeTicketCTA } from "@/components/EventContent";
 
-const MARQUEE = ["Glitter", "Stars", "Disco", "Euphoria", "Hyderabad", "Shimmer", "Mirror ball", "One night"];
+const MARQUEE = ["Glitter", "Stars", "Disco", "Euphoria", "Oblivion", "Hyderabad", "Shimmer", "Mirror ball", "One night"];
 
 function Nav() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-6 sm:pt-5">
       <nav className="nav-frost mx-auto flex max-w-6xl items-center justify-between gap-2 rounded-full py-1.5 pl-4 pr-1.5 sm:py-2 sm:pl-6 sm:pr-2">
         <a href="#top" className="font-display text-[1.45rem] italic leading-none tracking-tight text-ice sm:text-[1.7rem]">
-          euphoria<span className="text-orchid">✦</span>
+          euphoria<span className="text-orchid">✦</span><span className="collab-x hidden sm:inline">×</span><span className="hidden font-display text-ice/80 sm:inline">oblivion</span>
         </a>
         <ul className="hidden items-center gap-8 md:flex">
           {NAV.map((item) => (
@@ -51,7 +51,7 @@ function Hero() {
           <Reveal immediate delay={100}>
             <p className="eyebrow mb-6 flex items-center gap-3">
               <span className="h-px w-10 bg-lilac/60" />
-              {EVENT.audience} night · {EVENT.city}
+              Euphoria <span className="collab-x">×</span> Oblivion · {EVENT.dateShort} · {EVENT.city}
             </p>
           </Reveal>
           <Wordmark className="wordmark pb-[0.14em] pr-[0.12em] text-[clamp(4.6rem,23vw,9rem)] lg:text-[clamp(6.5rem,12vw,12.5rem)]">
@@ -62,8 +62,21 @@ function Hero() {
             <span className="h-px max-w-40 flex-1 bg-gradient-to-r from-lilac/70 to-transparent" />
             <span className="eyebrow text-orchid">✦ ✦ ✦</span>
           </Reveal>
-          <Reveal immediate delay={850}>
-            <p className="mt-8 max-w-md text-lg leading-relaxed text-ice/80 sm:text-xl">{EVENT.tagline}</p>
+          <Reveal immediate delay={800}>
+            <a
+              href={EVENT.collab.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="glass mt-7 inline-flex items-center gap-3 rounded-full px-5 py-2.5 transition-colors hover:border-orchid/60"
+            >
+              <span className="eyebrow !text-[0.66rem] text-ice/70">In collab with</span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/oblivion-logo.png" alt={EVENT.collab.name} className="h-9 w-auto" />
+              <span aria-hidden="true" className="text-orchid">↗</span>
+            </a>
+          </Reveal>
+          <Reveal immediate delay={900}>
+            <p className="mt-7 max-w-md text-lg leading-relaxed text-ice/80 sm:text-xl">{EVENT.tagline}</p>
           </Reveal>
 
           <Reveal immediate delay={1000} className="mt-10 flex flex-wrap items-center gap-4">
@@ -236,7 +249,7 @@ function Tickets() {
           <Tilt max={4} lift={16} className="rounded-[2.4rem]">
             <div className="glass relative overflow-hidden rounded-[2.4rem] px-6 py-16 text-center sm:px-16 sm:py-24">
               <Reveal>
-                <p className="eyebrow relative mb-6">Your invitation to Euphoria</p>
+                <p className="eyebrow relative mb-6">Euphoria <span className="collab-x">×</span> Oblivion · {EVENT.dateShort} · {EVENT.venue}</p>
               </Reveal>
               <Headline text="Be there. *Shine.*" className="relative text-6xl sm:text-8xl" />
               <Reveal delay={300}>
@@ -258,9 +271,16 @@ function Footer() {
     <footer className="relative border-t border-white/10 bg-ink/70 px-5 py-14 backdrop-blur-md sm:px-8">
       <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-10 md:flex-row md:items-end">
         <Reveal variant="left">
-          <p className="wordmark pb-[0.14em] pr-[0.1em] text-7xl">euphoria</p>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <p className="wordmark pb-[0.14em] pr-[0.1em] text-7xl">euphoria</p>
+            <span className="collab-x text-4xl">×</span>
+            <a href={EVENT.collab.url} target="_blank" rel="noopener noreferrer" aria-label="Oblivion on Instagram">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/oblivion-logo.png" alt="Oblivion" className="h-20 w-auto transition-opacity hover:opacity-80" />
+            </a>
+          </div>
           <p className="eyebrow mt-3">
-            Party · {EVENT.city}
+            {EVENT.dateShort} · {EVENT.venue}, Jubilee Hills
             {EVENT.presentedBy ? ` · ${EVENT.presentedBy}` : ""}
           </p>
         </Reveal>

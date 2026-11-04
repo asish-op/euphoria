@@ -9,6 +9,7 @@ import { onlineGateway } from '@/lib/paymentGateway';
 import { useEvent } from '@/components/EventProvider';
 import { BookingFrame, DynamicField, ErrorNotice, Loading, displayValue } from '@/components/BookingUI';
 import AuthForm from '@/components/AuthForm';
+import { EVENT } from '@/lib/event';
 
 export default function PassesPage() {
   const router = useRouter();
@@ -102,6 +103,7 @@ export default function PassesPage() {
     {loading || settingsLoading || authLoading ? <Loading text="Finding passes and booking details…" /> : error || settingsError ? <ErrorNotice message={error || settingsError} onRetry={() => { void load(); void refreshSettings(); }} /> : !config || !settings ? <ErrorNotice message="Booking details are unavailable." /> : <>
       {phase === 'browse' ? <>
         {checkoutError && <ErrorNotice message={checkoutError} />}
+        <div className="book-event-strip"><div><span>Event</span><strong>Euphoria <span className="collab-x">×</span> Oblivion</strong></div><div><span>Date</span><strong>{EVENT.date}</strong></div><div><span>Venue</span><strong>{EVENT.venue}, {EVENT.venueArea}</strong></div></div>
         {pending && user && <div className="book-card book-banner"><div><p className="eyebrow">Pick up where you left off</p><p>Order {pending.orderId} · {pending.paymentStatus}</p></div><Link className="btn btn-ghost" href={`/order/${encodeURIComponent(pending.orderId)}`}>Resume order →</Link></div>}
         {catalog.length ? <div className="book-pass-grid">{catalog.map(pass => {
           const available = quantityBounds(settings, pass);
@@ -109,10 +111,10 @@ export default function PassesPage() {
             <div className="book-pass-top"><p className="eyebrow">{pass.badge || pass.badgeLabel || 'Euphoria pass'}</p><span aria-hidden="true">✦</span></div>
             <h2>{pass.name}</h2><p className="book-muted">{pass.subtitle}</p>
             <p className="book-price">{money(pass.price, settings.currency, settings.currencySymbol)}{pass.originalPrice > pass.price && pass.price != null && <del>{money(pass.originalPrice, settings.currency, settings.currencySymbol)}</del>}</p>
-            <ul>{(pass.perks || []).map(perk => <li key={perk}>✧ {perk}</li>)}</ul>
+            <ul>{(pass.perks || []).map(perk => <li key={perk}><span aria-hidden="true">✧</span>{perk}</li>)}</ul>
             {(pass.entryTime || settings.entryTime) && <p className="book-muted">Entry · {pass.entryTime || settings.entryTime}</p>}
             <p className="book-stock">{pass.status === 'On Sale' ? `${Math.max(0, pass.totalQuantity - pass.soldCount)} passes remaining` : pass.status}</p>
-            <button className={`btn ${pass.featured ? 'btn-primary' : 'btn-ghost'}`} disabled={!available.available} onClick={() => choose(pass)}>{available.available ? 'Select pass' : pass.status === 'On Sale' ? 'Unavailable' : pass.status}<span aria-hidden="true">→</span></button>
+            <button className={`btn ${pass.featured ? 'btn-primary' : 'btn-ghost'}`} disabled={!available.available} onClick={() => choose(pass)}><span>{available.available ? 'Select pass' : pass.status === 'On Sale' ? 'Unavailable' : pass.status}</span>{available.available && <span aria-hidden="true">→</span>}</button>
           </article>;
         })}</div> : <div className="book-card book-state"><span className="book-spark">✦</span><h2>The night is taking shape.</h2><p>Passes haven’t been announced yet. Check back for official tiers and prices.</p><button className="btn btn-ghost" onClick={() => void load()}>Check availability</button></div>}
       </> : phase === 'success' ? <div className="book-card book-state"><span className="book-spark">✦</span><p className="eyebrow">You’re on the list</p><h2>Your night. Confirmed.</h2><p>Order {success.orderId}</p>{success.passes?.map(pass => <p key={pass.id}>{pass.buyerName} · {pass.passType}<br /><strong>{pass.ticketId || pass.id}</strong></p>)}<div className="book-actions"><Link className="btn btn-primary" href="/tickets">View my passes →</Link><Link className="btn btn-ghost" href={`/order/${encodeURIComponent(success.orderId)}`}>Order status</Link></div></div> : <div className="book-checkout-grid">
@@ -128,7 +130,7 @@ export default function PassesPage() {
             <div className="book-actions"><button type="button" className="btn btn-ghost" onClick={() => { setErrors({}); if (step > 0) setStep(step - 1); else setPhase('quantity'); }}>← Back</button><button className="btn btn-primary" type="submit">{step === steps.length - 1 ? 'Review booking' : 'Continue'} →</button></div>
           </form> : phase === 'review' ? <Review pass={selected} quantity={quantity} attendees={attendees} additional={additional} config={config} accepted={accepted} setAccepted={setAccepted} onCreate={create} busy={busy} error={checkoutError} onBack={() => { setStep(Math.max(0, steps.length - 1)); setPhase(steps.length ? 'details' : 'quantity'); }} /> : null}
         </section>
-        <aside className="book-card book-summary"><p className="eyebrow">Your night</p><span className="book-brand">euphoria✦</span><h3>{selected.name}</h3><p className="book-muted">{quantity} {quantity === 1 ? 'pass' : 'passes'} · {money(selected.price, settings.currency, settings.currencySymbol)} each</p><div className="book-total-line"><span>Pass subtotal</span><strong>{money(selected.price * quantity, settings.currency, settings.currencySymbol)}</strong></div><p className="book-muted">Discounts and booking charges appear in the review. Your final amount is confirmed before payment.</p></aside>
+        <aside className="book-card book-summary"><p className="eyebrow">Your night</p><span className="book-brand">euphoria✦</span><p className="book-muted"><span className="collab-x">×</span> Oblivion · {EVENT.date}<br />{EVENT.venue}, Jubilee Hills</p><h3>{selected.name}</h3><p className="book-muted">{quantity} {quantity === 1 ? 'pass' : 'passes'} · {money(selected.price, settings.currency, settings.currencySymbol)} each</p><div className="book-total-line"><span>Pass subtotal</span><strong>{money(selected.price * quantity, settings.currency, settings.currencySymbol)}</strong></div><p className="book-muted">Discounts and booking charges appear in the review. Your final amount is confirmed before payment.</p></aside>
       </div>}
     </>}
   </BookingFrame>;

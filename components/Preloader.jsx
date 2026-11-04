@@ -9,9 +9,9 @@ import { useMedia } from './useMedia';
 const PrismaticBurst = dynamic(() => import('./PrismaticBurst'), { ssr: false });
 
 // The board flips through these and lands on the name.
-const WORDS = ['LOADING', 'GLITTER', 'DISCO', 'EUPHORIA'];
-const MIN_MS = 3200; // always stays at least this long, so the name gets a moment on screen
-const MAX_MS = 3900; // ...and never longer than this, even on a slow connection
+const WORDS = ['LOADING', 'GLITTER', 'DISCO', 'EUPHORIA', 'OBLIVION'];
+const MIN_MS = 4300; // always stays at least this long, so the name gets a moment on screen
+const MAX_MS = 5000; // ...and never longer than this, even on a slow connection
 
 // Full-screen intro. When it lifts it sets html[data-ready] and fires `euphoria:ready`, which is what
 // the hero's entrance animations wait for.
@@ -85,7 +85,7 @@ export default function Preloader() {
     <div
       ref={rootRef}
       role="status"
-      aria-label="Loading Euphoria"
+      aria-label="Loading Euphoria X Oblivion"
       className="preloader fixed inset-0 z-[100] overflow-hidden bg-ink"
       style={{ clipPath: 'circle(150% at 50% 50%)' }}
     >
@@ -122,7 +122,7 @@ export default function Preloader() {
           gap={small ? 5 : 8}
           fontSize={small ? 36 : 68}
         />
-        <p className="eyebrow">Party · Hyderabad</p>
+        <p className="eyebrow">22 Nov · Knox Club &amp; Kitchen · Hyderabad</p>
       </div>
     </div>
   );

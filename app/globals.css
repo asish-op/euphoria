@@ -446,3 +446,6 @@ html[data-refract="true"] .btn {
       0 0;
   }
 }
+
+/* The collab cross: a clean mono multiplication sign, not the italic serif. */
+.collab-x { font-family: var(--font-mono); font-style: normal; font-weight: 300; color: var(--orchid); letter-spacing: 0; padding: 0 0.15em; }
