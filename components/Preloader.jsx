@@ -122,7 +122,7 @@ export default function Preloader() {
           gap={small ? 5 : 8}
           fontSize={small ? 36 : 68}
         />
-        <p className="eyebrow">22 Nov · Knox Club &amp; Kitchen · Hyderabad</p>
+        <p className="eyebrow">Coming soon · Knox Club &amp; Kitchen · Hyderabad</p>
       </div>
     </div>
   );

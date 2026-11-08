@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEvent } from './EventProvider';
 import { Reveal } from './anim';
 import { EVENT } from '@/lib/event';
+import PostponedNotice from './PostponedNotice';
 
 const safeUrl = value => {
   try { const url = new URL(value); return ['https:', 'http:'].includes(url.protocol) ? url.href : undefined; }
@@ -17,7 +18,7 @@ export function EventDetailCards() {
   const { settings } = useEvent();
   const [now, setNow] = useState(null);
   useEffect(() => { const timer = setInterval(() => setNow(Date.now()), 1000); return () => clearInterval(timer); }, []);
-  const difference = now ? Math.max(0, new Date('2026-11-22T00:00:00+05:30').getTime() - now) : 0;
+  const difference = now && !EVENT.postponed ? Math.max(0, new Date('2026-11-22T00:00:00+05:30').getTime() - now) : 0;
   const rows = [
     { k: 'When', v: EVENT.date },
     { k: 'Where', v: EVENT.venue },
@@ -35,5 +36,6 @@ export function EventDetailCards() {
 export function HomeTicketCTA() {
   const { settings } = useEvent();
   const closed = ['ended', 'cancelled'].includes(settings?.eventStatus);
+  if (EVENT.postponed) return <Reveal variant="scale" delay={450}><PostponedNotice className="mx-auto mt-10 text-left" /></Reveal>;
   return <Reveal variant="scale" delay={450}><div className="relative mt-10 flex flex-wrap justify-center gap-4"><Link href="/passes" className="btn btn-primary text-lg">{closed ? 'View passes' : 'Get tickets'} <span aria-hidden="true">→</span></Link><Link href="/tickets" className="btn btn-ghost text-lg">My passes</Link></div></Reveal>;
 }

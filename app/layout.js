@@ -23,11 +23,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Euphoria X Oblivion — 22 Nov, Hyderabad",
+  title: "Euphoria X Oblivion — Coming soon, Hyderabad",
   description:
-    "Euphoria X Oblivion. Glitter, stars and disco on 22 November at Knox Club & Kitchen, Jubilee Hills, Hyderabad. Powered by telugu.social.",
+    "Euphoria X Oblivion. Glitter, stars and disco — postponed to next summer — at Knox Club & Kitchen, Jubilee Hills, Hyderabad. Powered by telugu.social.",
   openGraph: {
-    title: "Euphoria X Oblivion — 22 Nov, Hyderabad",
+    title: "Euphoria X Oblivion — Coming soon, Hyderabad",
     description: "Glitter. Stars. Disco. One night that glows.",
     type: "website",
   },

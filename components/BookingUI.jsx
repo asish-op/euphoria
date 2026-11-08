@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useEvent } from './EventProvider';
+import { EVENT } from '@/lib/event';
 
 export function BookingFrame({ title, subtitle, children }) {
   const { user, logout } = useEvent();
@@ -9,13 +10,13 @@ export function BookingFrame({ title, subtitle, children }) {
     <header className="book-nav nav-frost">
       <Link className="book-brand" href="/">euphoria<span>✦</span><small className="collab-x"> × oblivion</small></Link>
       <nav aria-label="Booking navigation">
-        <Link href="/passes">Get tickets</Link>
+        {!EVENT.postponed && <Link href="/passes">Get tickets</Link>}
         <Link href="/tickets">My passes</Link>
         {user ? <button onClick={logout}>Sign out</button> : <Link href="/login">Sign in</Link>}
       </nav>
     </header>
     <main className="booking-page" data-scene="off">
-      <div className="book-heading"><p className="eyebrow">Euphoria <span className="collab-x">×</span> Oblivion · 22 Nov · Knox Club &amp; Kitchen, Jubilee Hills</p><h1>{title}</h1>{subtitle && <p>{subtitle}</p>}</div>
+      <div className="book-heading"><p className="eyebrow">Euphoria <span className="collab-x">×</span> Oblivion · {EVENT.dateShort} · Knox Club &amp; Kitchen, Jubilee Hills</p><h1>{title}</h1>{subtitle && <p>{subtitle}</p>}</div>
       {children}
     </main>
     <footer className="book-footer"><Link href="/">← Back to the night</Link><span>Powered by <a href="https://telugu.social" target="_blank" rel="noopener noreferrer">telugu.social</a></span></footer>

@@ -10,6 +10,7 @@ import { useEvent } from '@/components/EventProvider';
 import { BookingFrame, DynamicField, ErrorNotice, Loading, displayValue } from '@/components/BookingUI';
 import AuthForm from '@/components/AuthForm';
 import { EVENT } from '@/lib/event';
+import PostponedNotice from '@/components/PostponedNotice';
 
 export default function PassesPage() {
   const router = useRouter();
@@ -99,6 +100,7 @@ export default function PassesPage() {
     } catch (error) { setCheckoutError(errorMessage(error)); }
     finally { setBusy(false); lock.current = false; }
   }
+  if (EVENT.postponed) return <BookingFrame title="See you next summer."><PostponedNotice /></BookingFrame>;
   return <BookingFrame title="Your spot in the stars." subtitle="Choose your pass. Bring your people. Make it a night.">
     {loading || settingsLoading || authLoading ? <Loading text="Finding passes and booking details…" /> : error || settingsError ? <ErrorNotice message={error || settingsError} onRetry={() => { void load(); void refreshSettings(); }} /> : !config || !settings ? <ErrorNotice message="Booking details are unavailable." /> : <>
       {phase === 'browse' ? <>

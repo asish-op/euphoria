@@ -6,6 +6,7 @@ import { TopographyBg, SnowBg } from "@/components/SectionBackgrounds";
 import { Headline, Reveal, ScrollRefresh, StepDot, Timeline, Wordmark } from "@/components/anim";
 import { EVENT, NAV, HIGHLIGHTS, RUN_OF_SHOW } from "@/lib/event";
 import Link from "next/link";
+import PostponedNotice from "@/components/PostponedNotice";
 import { EventHeroFacts, EventDetailCards, HomeTicketCTA } from "@/components/EventContent";
 
 const MARQUEE = ["Glitter", "Stars", "Disco", "Euphoria", "Oblivion", "Hyderabad", "Shimmer", "Mirror ball", "One night"];
@@ -29,9 +30,15 @@ function Nav() {
             </li>
           ))}
         </ul>
-        <Link href="/passes" className="btn btn-primary whitespace-nowrap !px-4 !py-2.5 text-[0.82rem] sm:!px-5 sm:text-sm">
-          Get tickets
-        </Link>
+        {EVENT.postponed ? (
+          <a href={EVENT.contact.url} target="_blank" rel="noopener noreferrer" className="btn btn-primary whitespace-nowrap !px-4 !py-2.5 text-[0.82rem] sm:!px-5 sm:text-sm">
+            Contact us
+          </a>
+        ) : (
+          <Link href="/passes" className="btn btn-primary whitespace-nowrap !px-4 !py-2.5 text-[0.82rem] sm:!px-5 sm:text-sm">
+            Get tickets
+          </Link>
+        )}
       </nav>
     </header>
   );
@@ -79,14 +86,20 @@ function Hero() {
             <p className="mt-7 max-w-md text-lg leading-relaxed text-ice/80 sm:text-xl">{EVENT.tagline}</p>
           </Reveal>
 
-          <Reveal immediate delay={1000} className="mt-10 flex flex-wrap items-center gap-4">
-            <Link href="/passes" className="btn btn-primary text-base">
-              Get tickets <span aria-hidden="true">→</span>
-            </Link>
-            <a href="#night" className="btn btn-ghost text-base">
-              See the night
-            </a>
-          </Reveal>
+          {EVENT.postponed ? (
+            <Reveal immediate delay={1000} className="mt-10">
+              <PostponedNotice />
+            </Reveal>
+          ) : (
+            <Reveal immediate delay={1000} className="mt-10 flex flex-wrap items-center gap-4">
+              <Link href="/passes" className="btn btn-primary text-base">
+                Get tickets <span aria-hidden="true">→</span>
+              </Link>
+              <a href="#night" className="btn btn-ghost text-base">
+                See the night
+              </a>
+            </Reveal>
+          )}
 
           <Reveal immediate delay={1150}>
             <EventHeroFacts />
