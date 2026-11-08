@@ -231,3 +231,17 @@
   .book-progress { justify-content: flex-start; gap: 12px; }
   .book-progress li { flex: 0 0 auto; }
 }
+
+/* Coupon box: always visible on the review step */
+.book-coupon { margin: 24px 0 8px; padding: 18px; border: 1.5px dashed rgb(232 121 249 / .55); border-radius: 18px; background: linear-gradient(135deg, rgb(192 38 211 / .14), rgb(124 58 237 / .14)); }
+.book-coupon.is-applied { border-style: solid; border-color: rgb(74 222 128 / .55); background: rgb(34 197 94 / .08); }
+.book-coupon-title { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; font-weight: 700; font-size: 1.05rem; color: var(--ice); }
+.book-coupon-title span { display: inline-grid; place-content: center; width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #c026d3, #7c3aed); font-size: .85rem; color: #fff; }
+.book-coupon-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; }
+.book-coupon-row input { height: 50px; min-width: 0; padding: 0 16px; border-radius: 14px; background: rgb(8 2 20 / .7); border: 1px solid rgb(196 181 253 / .4); color: var(--ice); font-size: 1rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.book-coupon-row input::placeholder { text-transform: none; letter-spacing: 0; font-weight: 500; color: rgb(245 243 255 / .4); }
+.book-coupon-row input:focus { outline: none; border-color: var(--orchid); box-shadow: 0 0 0 3px rgb(232 121 249 / .22); }
+.book-coupon-row .btn { height: 50px; padding: 0 26px; }
+.book-coupon > .book-success { margin: 12px 0 0; font-size: .9rem; }
+.book-coupon .book-notice, .book-coupon [role="alert"] { margin-top: 12px; }
+@media (max-width: 380px) { .book-coupon-row { grid-template-columns: 1fr; } .book-coupon-row .btn { width: 100%; } }
